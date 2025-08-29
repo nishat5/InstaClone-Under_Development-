@@ -47,7 +47,7 @@ const AppTabNavigator = () => {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarShowLabel: false,
+          tabBarShowLabel: true,
           tabBarLabelStyle: {
             fontSize: 13,
             fontFamily: 'Roboto-Regular',
@@ -151,9 +151,10 @@ const styles = StyleSheet.create({
   },
 
   centerBtnWrap: {
-    // top: -22, // raises the button
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 5,
   },
   centerBtn: {
     width: 40,

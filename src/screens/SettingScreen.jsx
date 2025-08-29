@@ -8,6 +8,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import auth from '@react-native-firebase/auth';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -16,9 +17,20 @@ const SettingScreen = ({ navigation }) => {
   const headerBtnHandler = () => {
     navigation.navigate('Home');
   };
+
   const userCardHandler = () => {
     navigation.navigate('ProfileScreen');
   };
+
+  const handleLogout = async () => {
+    try {
+      await auth().signOut();
+      console.log('User signed out!');
+    } catch (error) {
+      console.error('Sign out error: ', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -48,7 +60,10 @@ const SettingScreen = ({ navigation }) => {
           iconName="file-present"
           optionName="Terms & Conditions"
         />
-        <TouchableOpacity style={styles.logoutBtnContainer}>
+        <TouchableOpacity
+          style={styles.logoutBtnContainer}
+          onPress={handleLogout}
+        >
           <AntDesign name="logout" size={20} color="red" />
           <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>

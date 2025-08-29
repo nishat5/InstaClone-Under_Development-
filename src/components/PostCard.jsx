@@ -15,9 +15,9 @@ const PostCard = ({
   time,
   postImage,
   description,
-  likes = 0,
-  comments = 0,
-  shares = 0,
+  likes = 14,
+  comments = 5,
+  shares = 2,
   onPressMore,
   onPressLike,
   onPressComment,
@@ -32,7 +32,7 @@ const PostCard = ({
           <Image source={{ uri: userImage }} style={styles.userImage} />
           <View>
             <Text style={styles.username}>{username}</Text>
-            <Text style={styles.time}>{time} Just Now</Text>
+            <Text style={styles.time}>{time}Just Now</Text>
           </View>
         </View>
         <TouchableOpacity onPress={onPressMore}>
@@ -81,7 +81,7 @@ const PostCard = ({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#ffffffff',
-    marginBottom: hp('3%'),
+    marginTop: hp('1%'),
     paddingBottom: hp('1%'),
   },
   header: {
@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   userImage: {
-    // width: 40,
     width: wp('10%'),
     height: wp('10%'),
     borderRadius: wp('5%'),
@@ -134,11 +133,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   actionBtn: {
-    marginRight: wp('2%'),
+    marginRight: wp('1.5%'),
   },
   count: {
     marginRight: wp('3%'),
-    fontSize: wp('3.5%'),
+    fontSize: wp('3.6%'),
     color: 'black',
     alignSelf: 'center',
   },

@@ -37,7 +37,7 @@ const UserCard = ({ onPress }) => {
 const styles = StyleSheet.create({
   container: {
     height: wp('19%'),
-    backgroundColor: '#B6FF2A',
+    backgroundColor: '#d45d48ff',
     padding: wp('3%'),
     borderRadius: wp('2%'),
     flexDirection: 'row',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     height: wp('13%'),
     borderRadius: wp('6.5%'),
     borderWidth: 1.5,
-    borderColor: 'red',
+    borderColor: 'white',
     backgroundColor: 'white',
     overflow: 'hidden',
   },
@@ -64,10 +64,12 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: wp('4%'),
+    color: 'white',
     fontFamily: 'Roboto-Bold',
   },
   userGmail: {
     fontSize: wp('3.5%'),
+    color: 'white',
     fontFamily: 'Roboto-Regular',
   },
 });

@@ -26,7 +26,7 @@ const StoryCard = ({ item }) => {
 // define your styles
 const styles = StyleSheet.create({
   container: {
-    height: hp('13.5%'),
+    height: hp('13%'),
     padding: wp('2%'),
   },
   imgContainer: {
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     height: wp('19%'),
     borderRadius: wp('9.5%'),
     borderWidth: 2,
-    borderColor: 'red',
+    borderColor: '#d45d48ff',
     backgroundColor: 'white',
     overflow: 'hidden',
     alignItems: 'center',
