@@ -1,14 +1,7 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Platform,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons'; // MaterialCommunityIcons
@@ -50,7 +43,6 @@ function CenterButton({ children, onPress }) {
 
 const AppTabNavigator = () => {
   return (
-    // <SafeAreaProvider style={{ flex: 1, backgroundColor: 'white' }}>
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
@@ -132,7 +124,6 @@ const AppTabNavigator = () => {
         />
       </Tab.Navigator>
     </NavigationContainer>
-    // </SafeAreaProvider>
   );
 };
 
@@ -157,18 +148,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     paddingBottom: 5,
     paddingTop: 5,
-    // subtle inner “pill” illusion via shadow + overlay
-    // ...Platform.select({
-    //   ios: {
-    //     shadowColor: '#000',
-    //     shadowOpacity: 0.2,
-    //     shadowOffset: { width: 0, height: 8 },
-    //     shadowRadius: 16,
-    //   },
-    //   android: {
-    //     elevation: 12,
-    //   },
-    // }),
   },
 
   centerBtnWrap: {
@@ -181,18 +160,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 10,
     backgroundColor: COLORS.active,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // glow/shadow
-    // ...Platform.select({
-    //   ios: {
-    //     shadowColor: COLORS.active,
-    //     shadowOpacity: 0.45,
-    //     shadowOffset: { width: 0, height: 8 },
-    //     shadowRadius: 14,
-    //   },
-    //   android: { elevation: 8 },
-    // }),
   },
 });
 
