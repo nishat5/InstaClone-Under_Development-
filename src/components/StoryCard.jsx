@@ -14,11 +14,11 @@ const StoryCard = ({ item }) => {
         <Image
           style={styles.img}
           source={{
-            uri: item.imageUrl,
+            uri: item.photoUrl,
           }}
         />
       </View>
-      <Text style={styles.userText}>{item.name}</Text>
+      <Text style={styles.userText}>{item.username}</Text>
     </TouchableOpacity>
   );
 };

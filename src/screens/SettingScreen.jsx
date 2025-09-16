@@ -1,5 +1,5 @@
 //import liraries
-import React, { Component } from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Header from '../components/Header';
 import UserCard from '../components/UserCard';
@@ -9,17 +9,22 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 import auth from '@react-native-firebase/auth';
-
+import firestore from '@react-native-firebase/firestore';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import { UserContext } from '../context/UserContext';
 
 // create a component
 const SettingScreen = ({ navigation }) => {
+  const { user } = useContext(UserContext);
+
   const headerBtnHandler = () => {
-    navigation.navigate('Home');
+    navigation.goBack();
   };
 
   const userCardHandler = () => {
-    navigation.navigate('ProfileScreen');
+    navigation.navigate('ProfileScreen', {
+      user,
+    });
   };
 
   const handleLogout = async () => {
@@ -39,7 +44,7 @@ const SettingScreen = ({ navigation }) => {
         settingHeader={true}
       />
       <View style={styles.settingWrapper}>
-        <UserCard onPress={userCardHandler} />
+        <UserCard onPress={userCardHandler} user={user} />
         <OptionCard
           iconType="Ionicons"
           iconName="bookmark-outline"

@@ -39,12 +39,6 @@ export const askPermission = async type => {
           : PERMISSIONS.ANDROID.READ_CONTACTS;
       break;
 
-    // case 'gallery': // Photos / Media Library
-    //   permission =
-    //     Platform.OS === 'ios'
-    //       ? PERMISSIONS.IOS.PHOTO_LIBRARY
-    //       : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE;
-    //   break;
     case 'gallery': // Photos / Media Library
       if (Platform.OS === 'ios') {
         permission = PERMISSIONS.IOS.PHOTO_LIBRARY;

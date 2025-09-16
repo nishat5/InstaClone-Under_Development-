@@ -20,6 +20,7 @@ const AuthRegister = ({ navigation }) => {
     email: '',
     password: '',
     confirmPassword: '',
+    username: '',
   });
 
   const [error, setError] = useState({
@@ -27,6 +28,7 @@ const AuthRegister = ({ navigation }) => {
     email: '',
     password: '',
     confirmPassword: '',
+    username: '',
   });
 
   const [flag, setFlag] = useState(false);
@@ -44,6 +46,7 @@ const AuthRegister = ({ navigation }) => {
       email: '',
       password: '',
       confirmPassword: '',
+      username: '',
     };
 
     // Basic validations
@@ -70,6 +73,11 @@ const AuthRegister = ({ navigation }) => {
       valid = false;
     }
 
+    if (!formData.username) {
+      newErrors.email = 'Please Enter Your Username';
+      valid = false;
+    }
+
     if (!valid) {
       setError(newErrors);
       return;
@@ -77,18 +85,20 @@ const AuthRegister = ({ navigation }) => {
 
     try {
       setFlag(true);
-      await registerUser(formData.email, formData.password);
+      await registerUser(formData.email, formData.password, formData.username);
       setFlag(false);
       // Alert.alert('User Added, Verification email is sent to your email!');
       setFormData({
         email: '',
         password: '',
         confirmPassword: '',
+        username: '',
       });
       setError({
         email: '',
         password: '',
         confirmPassword: '',
+        username: '',
       });
       navigation.navigate('Login');
     } catch (error) {
@@ -96,6 +106,7 @@ const AuthRegister = ({ navigation }) => {
         email: '',
         password: '',
         confirmPassword: '',
+        username: '',
       };
 
       switch (error.code) {
@@ -138,6 +149,20 @@ const AuthRegister = ({ navigation }) => {
           />
           <Text style={styles.headerText}>User Registration</Text>
           <View>
+            <Input
+              value={formData.username}
+              onChangeText={value => {
+                onChangeHandler('username', value);
+              }}
+              placeholder="Username"
+              autoCapitalize="none"
+              keyboardType="default"
+              onFocus={() => setFocusedInput('username')}
+              onBlur={() => setFocusedInput(false)}
+              focusedInput={focusedInput === 'username'}
+              error={error.username}
+              isUsername={true}
+            />
             <Input
               value={formData.email}
               onChangeText={value => {

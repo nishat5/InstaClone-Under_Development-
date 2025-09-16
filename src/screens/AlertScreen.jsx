@@ -6,7 +6,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const AlertScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>AlertScreen</Text>
+      <Text style={styles.text}>Alerts & Notificaitons</Text>
     </View>
   );
 };
@@ -15,10 +15,11 @@ const AlertScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 24,
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
+  text: { fontSize: 24, fontFamily: 'Roboto-Bold' },
 });
 
 //make this component available to the app

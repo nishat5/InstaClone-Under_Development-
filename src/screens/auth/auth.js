@@ -1,7 +1,7 @@
 import auth from '@react-native-firebase/auth';
 import firestore, { FieldValue } from '@react-native-firebase/firestore';
 
-export const registerUser = async (email, password) => {
+export const registerUser = async (email, password, username) => {
   const userCredentials = await auth().createUserWithEmailAndPassword(
     //creating user in firebase with email and pswd
     email,
@@ -14,7 +14,9 @@ export const registerUser = async (email, password) => {
   await firestore().collection('allusers').doc(userId).set({
     userId,
     email,
-    role: 'user', // default role for normal users
+    username,
+    photoUrl:
+      'https://t3.ftcdn.net/jpg/08/05/28/22/360_F_805282248_LHUxw7t2pnQ7x8lFEsS2IZgK8IGFXePS.jpg', // default role for normal users
     createdAt: firestore.FieldValue.serverTimestamp(),
   });
 

@@ -1,12 +1,10 @@
 import React from 'react';
-// import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ProfileScreen from '../screens/ProfileScreen';
-import SettingScreen from '../screens/SettingScreen';
+import UserProfileScreen from '../screens/UserProfileScreen';
 
 const Stack = createNativeStackNavigator();
 
-const UserNavigator = () => {
+const MyProfileNavigator = () => {
   return (
     // <NavigationContainer>
     <Stack.Navigator
@@ -15,11 +13,9 @@ const UserNavigator = () => {
         animation: 'fade_from_bottom',
       }}
     >
-      <Stack.Screen name="Setting" component={SettingScreen} />
-      <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Stack.Screen name="UserProfile" component={UserProfileScreen} />
     </Stack.Navigator>
-    // </NavigationContainer>
   );
 };
 
-export default UserNavigator;
+export default MyProfileNavigator;

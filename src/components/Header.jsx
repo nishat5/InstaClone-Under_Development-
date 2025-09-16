@@ -18,7 +18,9 @@ const Header = ({ onPress, heading, sideTitle, settingHeader }) => {
       {settingHeader ? (
         <Text></Text>
       ) : (
-        <Text style={styles.headerText}>{sideTitle}</Text>
+        <TouchableOpacity>
+          <Text style={styles.headerText}>{sideTitle}</Text>
+        </TouchableOpacity>
       )}
     </View>
   );
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    alignSelf: 'center',
     paddingHorizontal: wp('2%'),
     backgroundColor: 'white',
   },

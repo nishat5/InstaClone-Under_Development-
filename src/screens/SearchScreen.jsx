@@ -6,7 +6,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const SearchScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Search Screen</Text>
+      <Text style={styles.text}>Search Screen</Text>
     </View>
   );
 };
@@ -15,14 +15,11 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 24,
+    justifyContent: 'center',
     backgroundColor: 'white',
   },
-  headerText: {
-    fontSize: 27,
-  },
+  text: { fontSize: 24, fontFamily: 'Roboto-Bold' },
 });
 
 //make this component available to the app

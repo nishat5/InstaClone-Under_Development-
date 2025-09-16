@@ -11,7 +11,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import SplashScreen from 'react-native-splash-screen';
 import AuthNavigator from '../navigators/AuthNavigator';
 import { AuthContext } from '../context/AuthContext';
-import AppTabNavigator from '../navigators/AppTabNavigator';
+// import AppTabNavigator from '../navigators/AppTabNavigator';
+import AppNavigator from '../navigators/AppNavigator';
 
 // create a component
 const AppContent = () => {
@@ -19,7 +20,7 @@ const AppContent = () => {
     SplashScreen.hide();
   }, []);
 
-  const { user, role } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   //on first render, if both user and role are null then it will show activity indicator
   //this will avoid me from showing flicker of userNavigator on admin login
@@ -51,7 +52,7 @@ const AppContent = () => {
         />
 
         {/* {user && user.emailVerified ? <AppTabNavigator /> : <AuthNavigator />} */}
-        {user ? <AppTabNavigator /> : <AuthNavigator />}
+        {user ? <AppNavigator /> : <AuthNavigator />}
         {/* <AppTabNavigator /> */}
         {/* <AuthNavigator /> */}
       </View>

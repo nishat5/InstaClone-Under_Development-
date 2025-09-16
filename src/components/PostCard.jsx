@@ -7,32 +7,40 @@ import {
 } from 'react-native-responsive-screen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const PostCard = ({
-  userImage,
-  username,
-  time,
-  postImage,
-  description,
-  likes = 14,
-  comments = 5,
-  shares = 2,
+  item,
+  // userImage,
+  // username,
+  // time,
+  // postImage,
+  // description,
+  likes,
+  // comments = 5,
+  // shares = 2,
   onPressMore,
   onPressLike,
+  isLiked,
   onPressComment,
   onPressShare,
   onPressSave,
+  onPressProfileName,
 }) => {
   return (
     <View style={styles.card}>
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.userInfo}>
-          <Image source={{ uri: userImage }} style={styles.userImage} />
+          <TouchableOpacity onPress={onPressProfileName}>
+            <Image source={{ uri: item.userImage }} style={styles.userImage} />
+          </TouchableOpacity>
           <View>
-            <Text style={styles.username}>{username}</Text>
-            <Text style={styles.time}>{time}Just Now</Text>
+            <TouchableOpacity onPress={onPressProfileName}>
+              <Text style={styles.username}>{item.username}</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.time}>Just Now</Text>
           </View>
         </View>
         <TouchableOpacity onPress={onPressMore}>
@@ -43,31 +51,36 @@ const PostCard = ({
       {/* Post Image */}
       <Image
         source={{
-          uri: postImage,
+          uri: item.postImage,
         }}
         style={styles.postImage}
+        resizeMode="cover"
       />
 
       {/* Description */}
-      <Text style={styles.description}>{description} This is Description</Text>
+      <Text style={styles.description}>{item.description}</Text>
 
-      {/* Action Buttons with counts */}
+      {/* Like, Comment, Share Buttons with Counts */}
       <View style={styles.actions}>
         <View style={styles.leftActions}>
           <TouchableOpacity onPress={onPressLike} style={styles.actionBtn}>
-            <AntDesign name="hearto" size={24} color="black" />
+            <Entypo
+              name={isLiked ? 'heart' : 'heart-outlined'}
+              size={26}
+              color={isLiked ? 'red' : 'black'}
+            />
           </TouchableOpacity>
           <Text style={styles.count}>{likes}</Text>
 
           <TouchableOpacity onPress={onPressComment} style={styles.actionBtn}>
             <Ionicons name="chatbubble-outline" size={24} color="black" />
           </TouchableOpacity>
-          <Text style={styles.count}>{comments}</Text>
+          <Text style={styles.count}>{item.comments}</Text>
 
           <TouchableOpacity onPress={onPressShare} style={styles.actionBtn}>
             <Feather name="send" size={24} color="black" />
           </TouchableOpacity>
-          <Text style={styles.count}>{shares}</Text>
+          <Text style={styles.count}>{item.shares}</Text>
         </View>
 
         <TouchableOpacity onPress={onPressSave}>
@@ -103,6 +116,7 @@ const styles = StyleSheet.create({
   username: {
     fontFamily: 'Roboto-Bold',
     fontSize: wp('4%'),
+    textTransform: 'capitalize',
   },
   time: {
     fontSize: wp('3%'),
@@ -111,10 +125,10 @@ const styles = StyleSheet.create({
   },
   postImage: {
     alignSelf: 'center',
-    width: wp('90%'),
-    height: hp('40%'),
-    borderRadius: 15,
-    backgroundColor: '#ccc',
+    borderRadius: wp('5%'),
+    width: wp('100%'),
+    height: undefined,
+    aspectRatio: 16 / 9,
   },
   description: {
     paddingHorizontal: wp('3.5%'),

@@ -25,14 +25,20 @@ const Input = ({
   isEmail,
   isPassword,
   isConfirmPassword,
+  isUsername,
 }) => {
   const [visible, setVisible] = useState(false); //state for showing or hiding password eye icon
   return (
     <>
       <View style={[styles.inputWrapper, focusedInput && styles.inputFocused]}>
-        {isEmail && (
+        {isUsername && (
           <View>
             <Ionicons color="#0094D9" name="person" size={18} />
+          </View>
+        )}
+        {isEmail && (
+          <View>
+            <Ionicons color="#0094D9" name="mail" size={18} />
           </View>
         )}
 
@@ -61,7 +67,7 @@ const Input = ({
           placeholder={placeholder}
           autoCapitalize={autoCapitalize}
           keyboardType={keyboardType}
-          secureTextEntry={visible ? false : true}
+          secureTextEntry={isPassword || isConfirmPassword ? !visible : false}
           style={styles.input}
           onFocus={onFocus}
           onBlur={onBlur}

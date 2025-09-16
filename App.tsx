@@ -1,10 +1,11 @@
+import React from 'react';
 import AppContent from './src/AppContent/AppContent';
-import { AuthProvider } from './src/context/AuthContext';
+import ContextWrapper from './src/context/ContextWrapper';
 const App = () => {
   return (
-    <AuthProvider>
+    <ContextWrapper>
       <AppContent />
-    </AuthProvider>
+    </ContextWrapper>
   );
 };
 
