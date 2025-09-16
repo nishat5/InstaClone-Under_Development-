@@ -18,15 +18,57 @@ import {
 import MainHeader from '../components/MainHeader';
 import { PostsContext } from '../context/PostsContext';
 import CustomButton from '../components/CustomButton';
+import { followUser, unfollowUser } from '../services/userActions';
 
 const UserProfileScreen = ({ navigation, route }) => {
-  const { userId } = route.params || {};
+  // const { userId } = route.params || {};
   const [user, setUser] = useState(null);
   const { posts } = useContext(PostsContext);
   const [userPosts, setUserPosts] = useState(null);
   const [postCount, setPostCount] = useState(null);
-  const [followToggle, setFollowToggle] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  const { userId } = route.params;
+  const currentUserId = auth().currentUser.uid;
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [followersCount, setFollowersCount] = useState(0);
+  const [followingCount, setFollowingCount] = useState(0);
+
+  //onsnapshot listener to add new sub collection of follower and following in all user collection
+  useEffect(() => {
+    if (!userId) return;
+
+    const userRef = firestore().collection('allusers').doc(userId);
+
+    // Followers count + check if I'm following
+    const unsubscribeFollowers = userRef
+      .collection('followers')
+      .onSnapshot(snapshot => {
+        setFollowersCount(snapshot.size);
+        setIsFollowing(snapshot.docs.some(doc => doc.id === currentUserId));
+      });
+
+    // Following count
+    const unsubscribeFollowing = userRef
+      .collection('following')
+      .onSnapshot(snapshot => {
+        setFollowingCount(snapshot.size);
+      });
+
+    return () => {
+      unsubscribeFollowers();
+      unsubscribeFollowing();
+    };
+  }, [userId]);
+
+  //follow button handler
+  const handleFollowToggle = async () => {
+    if (isFollowing) {
+      await unfollowUser(userId);
+    } else {
+      await followUser(userId);
+    }
+  };
 
   useEffect(() => {
     if (!userId) return;
@@ -49,7 +91,7 @@ const UserProfileScreen = ({ navigation, route }) => {
     };
   }, [userId]);
 
-  //will fetch number of posts a user has done
+  //will fetch number of posts a user has posted
   const fetchPostCount = async uid => {
     try {
       const snapshot = await firestore()
@@ -64,7 +106,7 @@ const UserProfileScreen = ({ navigation, route }) => {
     }
   };
 
-  //actually fetching the posts data
+  //actually fetching the posts data (image, description etc)
   const fetchCurrentUserPosts = () => {
     const userPosts = posts.filter(post => post.userId == userId);
     setUserPosts(userPosts);
@@ -121,11 +163,11 @@ const UserProfileScreen = ({ navigation, route }) => {
           <Text style={styles.text}>Posts</Text>
         </View>
         <TouchableOpacity style={styles.innerContainer}>
-          <Text style={styles.text}>{user.followers || 0}</Text>
+          <Text style={styles.text}>{followersCount}</Text>
           <Text style={styles.text}>Followers</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.innerContainer}>
-          <Text style={styles.text}>{user.following || 0}</Text>
+          <Text style={styles.text}>{followingCount}</Text>
           <Text style={styles.text}>Following</Text>
         </TouchableOpacity>
       </View>
@@ -138,11 +180,11 @@ const UserProfileScreen = ({ navigation, route }) => {
 
       <CustomButton
         style={[
-          followToggle && { backgroundColor: '#484849ff' },
+          isFollowing && { backgroundColor: '#484849ff' },
           { marginHorizontal: 5, marginVertical: 5 },
         ]}
-        title={!followToggle ? 'Follow' : 'Unfollow'}
-        onPress={() => setFollowToggle(!followToggle)}
+        title={isFollowing ? 'Unfollow' : 'Follow'}
+        onPress={handleFollowToggle}
       />
 
       {/* Posts */}

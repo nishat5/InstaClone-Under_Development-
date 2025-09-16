@@ -65,7 +65,16 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const renderStoryItems = ({ item }) => {
-    return <StoryCard item={item} />;
+    return (
+      <StoryCard
+        item={item}
+        onPress={() => {
+          navigation.navigate('UserProfile', {
+            userId: item.userId,
+          });
+        }}
+      />
+    );
   };
 
   const renderPostItems = ({ item }) => {

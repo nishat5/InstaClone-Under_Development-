@@ -7,9 +7,9 @@ import {
 } from 'react-native-responsive-screen';
 
 // create a component
-const StoryCard = ({ item }) => {
+const StoryCard = ({ item, onPress }) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.imgContainer}>
         <Image
           style={styles.img}
